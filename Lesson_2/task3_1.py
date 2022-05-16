@@ -7,7 +7,7 @@ def parser(expr):
         a = ''
 
     for i in expr:  # виокремлюю перше значення
-        if not i.isdigit():  # коли цикл доходить до операнда, то він зупиняється і робить слайс залишку
+        if not i.isdigit() and i != '.':  # коли цикл доходить до операнда, то він зупиняється і робить слайс залишку
             expr = expr[expr.index(i):]
             break
         a += i
@@ -25,19 +25,19 @@ def parser(expr):
 # функція здійснює основні розрахунки
 def processor(a, op, b):
     if op == '+':
-        return int(a) + int(b)
+        return float(a) + float(b)
     if op == '-':
-        return int(a) - int(b)
+        return float(a) - float(b)
     if op == '*':
-        return int(a) * int(b)
+        return float(a) * float(b)
     if op == '/':
-        return int(a) / int(b)
+        return float(a) / float(b)
     if op == '**':
-        return int(a) ** int(b)
+        return float(a) ** float(b)
     if op == '//':
-        return int(a) // int(b)
+        return float(a) // float(b)
     if op == '%':
-        return int(a) % int(b)
+        return float(a) % float(b)
     else:
         return 'Невідома операція'
 
@@ -49,9 +49,13 @@ def interface():
         expr = input('Введи вираз: ').replace(' ', '')  # вхідні дані можуть бути з пробілами і без
         if expr == '0':  # умова  виходу з циклу
             break
-        a, op, b = parser(expr)
+        try:
+            a, op, b = parser(expr)
+        except IndexError:
+            print('Некоректний ввід')
+            continue
         try:  # перевірка некоректно введених даних
-            output = processor(a, op, b)
+            output = round(processor(a, op, b), 4)
         except ValueError:
             print("Некоректний ввід")
         except ZeroDivisionError:

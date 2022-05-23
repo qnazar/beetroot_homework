@@ -29,26 +29,25 @@ def create_field(mines=mines, size=field_size):
 solved_field, current_field = create_field()
 
 
-# TODO optimize with field size
-def find_neighbor_indexes(index):
+def find_neighbor_indexes(index, s=field_size):
     if index == 0:  # left-up
-        neighbors = [index + 1, index + 9, index + 8]
-    elif index == field_size - 1:  # right-up
-        neighbors = [index - 1, index + 8, index + 7]
-    elif index == field_size * (field_size - 1):  # left-down
-        neighbors = [index - 8, index - 7, index + 1]
-    elif index == field_size ** 2 - 1:  # right-down
-        neighbors = [index - 9, index - 8, index - 1]
-    elif 0 < index < field_size - 1:  # up
-        neighbors = [index - 1, index + 1, index + 7, index + 8, index + 9]
-    elif index % field_size == 0:  # left
-        neighbors = [index - 8, index - 7, index + 1, index + 8, index + 9]
-    elif (index + 1) % field_size == 0:  # right
-        neighbors = [index - 9, index - 8, index - 1, index + 7, index + 8]
-    elif field_size * (field_size - 1) < index < field_size ** 2 - 1:  # down
-        neighbors = [index - 9, index - 8, index - 7, index - 1, index + 1]
+        neighbors = [index + 1, index + s+1, index + s]
+    elif index == s - 1:  # right-up
+        neighbors = [index - 1, index + s, index + s-1]
+    elif index == s * (s - 1):  # left-down
+        neighbors = [index - s, index - s-1, index + 1]
+    elif index == s ** 2 - 1:  # right-down
+        neighbors = [index - s+1, index - s, index - 1]
+    elif 0 < index < s - 1:  # up
+        neighbors = [index - 1, index + 1, index + s-1, index + s, index + s+1]
+    elif index % s == 0:  # left
+        neighbors = [index - s, index - s-1, index + 1, index + s, index + s+1]
+    elif (index + 1) % s == 0:  # right
+        neighbors = [index - s-1, index - s, index - 1, index + s-1, index + s]
+    elif s * (s - 1) < index < s ** 2 - 1:  # down
+        neighbors = [index - s+1, index - s, index - s-1, index - 1, index + 1]
     else:  # center
-        neighbors = [index - 9, index - 8, index - 7, index - 1, index + 9, index + 8, index + 7, index + 1]
+        neighbors = [index - s+1, index - s, index - s-1, index - 1, index + s+1, index + s, index + s-1, index + 1]
     return neighbors
 
 
@@ -72,17 +71,21 @@ def print_solved_field(field=solved_field, size=field_size):
 
 # TODO optimize printing with bigger sizes
 def print_current_field(field=current_field, size=field_size):
-    print(' |', *[n for n in range(1, size+1)])
-    print('', *['-' for n in range(size+1)], sep='-')
-    raw = 1
-    for i in range(0, size ** 2, size):
-        print(f'{raw}|', sep='', end=' ')
-        print(*field[i:i + size])
-        raw += 1
-    print('\n')
+    if size == 8:
+        print(' |', *[n for n in range(1, size+1)])
+        print('', *['-' for n in range(size+1)], sep='-')
+        raw = 1
+        for i in range(0, size ** 2, size):
+            print(f'{raw}|', sep='', end=' ')
+            print(*field[i:i + size])
+            raw += 1
+        print('\n')
+    else:
+        for i in range(0, size ** 2, size):
+            print(*field[i:i + size])
+        print('\n')
 
 
-# TODO add winning check and print
 def play():
     print_current_field()
     print('Input 2 numbers with space between them. First number for the column and second is for the raw.', end='\n\n')
@@ -114,6 +117,9 @@ def play():
         else:
             update_field(shoot)
             print_current_field()
+        if current_field.count('X') == field_size:  # WIN
+            print('YOU WON!')
+            break
 
 
 def update_field(target, field=solved_field):
@@ -132,4 +138,5 @@ def update_field(target, field=solved_field):
 
 
 if __name__ == '__main__':
+    print_solved_field()
     play()

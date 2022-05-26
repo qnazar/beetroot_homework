@@ -35,13 +35,13 @@ def find_neighbor_indexes(index, s=field_size):
     elif index == s - 1:  # right-up
         neighbors = [index - 1, index + s, index + s-1]
     elif index == s * (s - 1):  # left-down
-        neighbors = [index - s, index - s-1, index + 1]
+        neighbors = [index - s, index - s+1, index + 1]
     elif index == s ** 2 - 1:  # right-down
-        neighbors = [index - s+1, index - s, index - 1]
+        neighbors = [index - s-1, index - s, index - 1]
     elif 0 < index < s - 1:  # up
         neighbors = [index - 1, index + 1, index + s-1, index + s, index + s+1]
     elif index % s == 0:  # left
-        neighbors = [index - s, index - s-1, index + 1, index + s, index + s+1]
+        neighbors = [index - s, index - s+1, index + 1, index + s, index + s+1]
     elif (index + 1) % s == 0:  # right
         neighbors = [index - s-1, index - s, index - 1, index + s-1, index + s]
     elif s * (s - 1) < index < s ** 2 - 1:  # down
@@ -123,7 +123,7 @@ def play():
 
 
 def update_field(target, field=solved_field):
-    if field[target] > 0:  # when marked tile is shooted, I need to open only this one
+    if field[target] > 0: # when marked tile is shooted, I need to open only this one
         return current_field
     else:  # when 0 - open all zeros near this one and the nearest marked tiles
         neighbors = find_neighbor_indexes(target)

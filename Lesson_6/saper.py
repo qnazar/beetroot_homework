@@ -11,8 +11,14 @@ SIZES = {'S': 8,
 
 def choose_field_size():
     print('S - 8*8', 'M - 10*10', 'L - 15*15', 'XL - 20*20', sep='    ||    ')
-    size = input('Choose the field size: ')
-    print('Initializing field {0}*{0}. Number of mines - {0}'.format(SIZES[size]), end='\n\n')
+    while True:
+        try:
+            size = input('Choose the field size: ')
+            print('Initializing field {0}*{0}. Number of mines - {0}'.format(SIZES[size]), end='\n\n')
+            break
+        except KeyError:
+            print("I don't have this field size. Please choose one of this: S, M, L, XL")
+            continue
     return SIZES[size]
 
 
@@ -86,45 +92,66 @@ def print_current_field(field=current_field, size=field_size):
         print('\n')
 
 
-def play():
-    print_current_field()
-    print('Input 2 numbers with space between them. First number for the column and second is for the raw.', end='\n\n')
-    while True:
-        move = input('Make your move: ')
-        if move == 'e':   # exit from the game
-            print('It was a great game! Good bye =)')
-            break
-        try:
-            column, raw = move.split()
-            column = int(column) - 1
-            raw = int(raw) - 1
-        except ValueError:
-            print('Please enter two numbers from 1 to {}'.format(field_size))
-            continue
-        shoot = column + raw * field_size
-        if shoot < 0:
-            print('Please enter two numbers from 1 to {}'.format(field_size))
-            continue
-        try:
-            current_field[shoot] = solved_field[shoot]
-        except IndexError:
-            print('You are out of field. Make another move')
-            continue
-        if solved_field[shoot] == -1:  # GAME OVER
-            print_current_field()
-            print('BAAAAM. You lost!')
-            break
-        else:
-            update_field(shoot)
-            print_current_field()
-        if current_field.count('X') == field_size:  # WIN
-            print('YOU WON!')
-            break
+def shooted_tile(move):
+    try:
+        column, raw = move.split()
+        column = int(column) - 1
+        raw = int(raw) - 1
+    except ValueError:
+        print('Please enter two numbers from 1 to {}'.format(field_size))
+        return True
+    shoot = column + raw * field_size
+    if shoot < 0:
+        print('Please enter two numbers from 1 to {}'.format(field_size))
+        return True
+    try:
+        current_field[shoot] = solved_field[shoot]
+    except IndexError:
+        print('You are out of field. Make another move')
+        return True
+    return shoot
 
 
-def update_field(target, field=solved_field):
-    if field[target] > 0: # when marked tile is shooted, I need to open only this one
+def perform_move(move):
+
+    if move == 'm':
+        while True:
+            move = input('What tile do you want to mark? ')
+            shoot = shooted_tile(move)
+            if isinstance(shoot, bool):
+                continue
+            break
+        update_field(target=shoot, marking=True)
+        print_current_field()
+        return True
+
+    if move == 'e':  # exit from the game
+        print('It was a great game! Good bye =)')
+        return False
+
+    shoot = shooted_tile(move)
+    if isinstance(shoot, bool):
+        return True
+
+    if solved_field[shoot] == -1:  # GAME OVER
+        print_current_field()
+        print('BAAAAM. You lost!')
+        return False
+    else:
+        update_field(shoot)
+        print_current_field()
+        return True
+
+
+def update_field(target, field=solved_field, marking=False):
+
+    if marking:  # marking mode
+        current_field[target] = 'M'
         return current_field
+
+    elif field[target] > 0:  # when marked tile is shooted, I need to open only this one
+        return current_field
+
     else:  # when 0 - open all zeros near this one and the nearest marked tiles
         neighbors = find_neighbor_indexes(target)
         for tile in neighbors:
@@ -135,6 +162,24 @@ def update_field(target, field=solved_field):
                 else:
                     current_field[tile] = solved_field[tile]
         return current_field
+
+
+def is_winning():
+    if current_field.count('X') + current_field.count('M') == field_size:
+        print('YOU WON!')
+        return True
+    else:
+        return False
+
+
+def play(game=True):
+    print_current_field()
+    print('Input 2 numbers divided by space. First for the column and second is for the raw.', end='\n\n')
+    while game:
+        move = input('Make your move: ').strip()
+        game = perform_move(move)
+        if is_winning():
+            break
 
 
 if __name__ == '__main__':

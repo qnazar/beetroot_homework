@@ -1,0 +1,28 @@
+{
+    "contacts": [
+        {
+            "first name": "Nazar",
+            "last name": "Klypych",
+            "phone number": "+380636760132",
+            "city": "Kyiv"
+        },
+        {
+            "first name": "Taras",
+            "last name": "Topolya",
+            "phone number": "+380635489625",
+            "city": "Lviv"
+        },
+        {
+            "first name": "Vika",
+            "last name": "Dvornyk",
+            "phone number": "+380675895632",
+            "city": "Kyiv"
+        },
+        {
+            "first name": "Test",
+            "last name": "Testenko",
+            "phone number": "1111",
+            "city": "Testopolis"
+        }
+    ]
+}

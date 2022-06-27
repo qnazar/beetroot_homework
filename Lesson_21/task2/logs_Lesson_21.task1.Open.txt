@@ -1,0 +1,27 @@
+[2022-06-27 14:56:47,210: DEBUG in __init__] Instance of context manager has been created in w mode
+[2022-06-27 14:56:47,210: INFO in __init__] Total count of instances - 1
+[2022-06-27 14:56:47,210: DEBUG in __enter__] __enter__ method starts
+[2022-06-27 14:56:47,210: DEBUG in __enter__] File opened
+[2022-06-27 14:56:47,210: DEBUG in __exit__] __exit__ method starts
+[2022-06-27 14:56:47,210: INFO in __exit__] File closed - True
+[2022-06-27 14:56:47,210: DEBUG in __init__] Instance of context manager has been created in r mode
+[2022-06-27 14:56:47,210: INFO in __init__] Total count of instances - 2
+[2022-06-27 14:56:47,210: DEBUG in __enter__] __enter__ method starts
+[2022-06-27 14:56:47,210: DEBUG in __enter__] File opened
+[2022-06-27 14:56:47,210: DEBUG in __exit__] __exit__ method starts
+[2022-06-27 14:56:47,210: INFO in __exit__] File closed - True
+[2022-06-27 14:56:47,210: DEBUG in __init__] Instance of context manager has been created in r mode
+[2022-06-27 14:56:47,210: INFO in __init__] Total count of instances - 3
+[2022-06-27 14:56:47,210: DEBUG in __enter__] __enter__ method starts
+[2022-06-27 14:56:47,210: DEBUG in __init__] Instance of context manager has been created in w mode
+[2022-06-27 14:56:47,210: INFO in __init__] Total count of instances - 4
+[2022-06-27 14:56:47,210: DEBUG in __enter__] __enter__ method starts
+[2022-06-27 14:56:47,210: DEBUG in __enter__] File opened
+[2022-06-27 14:56:47,210: DEBUG in __exit__] __exit__ method starts
+[2022-06-27 14:56:47,210: INFO in __exit__] File closed - True
+[2022-06-27 14:56:47,226: DEBUG in __init__] Instance of context manager has been created in w mode
+[2022-06-27 14:56:47,226: INFO in __init__] Total count of instances - 5
+[2022-06-27 14:56:47,226: DEBUG in __enter__] __enter__ method starts
+[2022-06-27 14:56:47,226: DEBUG in __enter__] File opened
+[2022-06-27 14:56:47,226: DEBUG in __exit__] __exit__ method starts
+[2022-06-27 14:56:47,226: INFO in __exit__] File closed - True

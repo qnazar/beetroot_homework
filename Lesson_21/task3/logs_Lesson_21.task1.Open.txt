@@ -1,0 +1,6 @@
+[2022-06-27 14:57:20,354: DEBUG in __init__] Instance of context manager has been created in r mode
+[2022-06-27 14:57:20,354: INFO in __init__] Total count of instances - 1
+[2022-06-27 14:57:20,354: DEBUG in __enter__] __enter__ method starts
+[2022-06-27 14:57:20,354: DEBUG in __enter__] File opened
+[2022-06-27 14:57:20,354: DEBUG in __exit__] __exit__ method starts
+[2022-06-27 14:57:20,354: INFO in __exit__] File closed - True

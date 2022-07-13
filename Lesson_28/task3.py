@@ -22,7 +22,10 @@ class Queue:
         while current.next_node:
             previous = current
             current = current.next_node
-        previous.next_node = None
+        if previous:
+            previous.next_node = None
+        else:
+            self.head = None
         return current.data
 
     def is_empty(self):
@@ -54,6 +57,10 @@ q.enqueue(5)
 
 print(q)
 
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
+print(q.dequeue())
 print(q.dequeue())
 
 print(q)

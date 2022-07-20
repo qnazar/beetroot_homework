@@ -1,0 +1,42 @@
+Len = 10000, partition limit - 9
+Pass 1
+Quick:  0.0435161
+Hybrid: 0.0485699
+
+Pass 2
+Quick:  0.0275049
+Hybrid: 0.0643838
+
+Pass 3
+Quick:  0.0396653
+Hybrid: 0.037686
+
+Pass 4
+Quick:  0.0364372
+Hybrid: 0.0550397
+
+Pass 5
+Quick:  0.0483154
+Hybrid: 0.0584777
+
+Pass 6
+Quick:  0.0262471
+Hybrid: 0.0287053
+
+Pass 7
+Quick:  0.0258806
+Hybrid: 0.0424267
+
+Pass 8
+Quick:  0.0467004
+Hybrid: 0.0374905
+
+Pass 9
+Quick:  0.0416769
+Hybrid: 0.037267
+
+Pass 10
+Quick:  0.0396354
+Hybrid: 0.0378727
+
+{'quick': 6, 'hybrid': 4}
